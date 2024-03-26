@@ -5,15 +5,41 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    children: [
+      {
+        path:'',
+        name: 'home default',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Home/HomeDefault.vue'),
+        props:true
+      },
+      
+      {
+        path:':id',
+        name: 'Edit Task',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Home/HomeEdit.vue'),
+        props:true
+      }
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
+    path: '/details',
+    name: 'details',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/DetailsView.vue'),
+    children:[
+      {
+        path: ':id',
+        name: 'details',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '../views/Details/MoreDetails.vue'),
+
+      }
+    ]
   }
 ]
 
