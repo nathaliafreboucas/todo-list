@@ -8,6 +8,7 @@
     </div>
 </template>
 <script lang="ts">
+import ITask from '@/interfaces/ITask'
 import store from '@/store'
 import { defineComponent } from 'vue'
 
@@ -21,12 +22,15 @@ export default defineComponent({
     },
     mounted(){
         const param = this.$route.params.id || 0
-        const task = store.state.tasks.find((task) => task.id == param)
+        const task = store.state.tasks.find((task) => task.id == param)        
+
         const localstorage = localStorage.getItem('tasks')
-        const localstorageParse = JSON.parse(localStorage.toString())
-        
-        this.title = task?.input.toUpperCase() || ''
-        this.details = task?.textArea || ''
+        const localstorageParse = localstorage? JSON.parse(localstorage):[]
+
+        const local = localstorageParse.find((task: any)=> task.id == param)
+                
+        this.title = task?.input.toUpperCase() || local.input
+        this.details = task?.textArea || local.textArea
         
     },
     
