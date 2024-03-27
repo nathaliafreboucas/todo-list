@@ -1,6 +1,6 @@
 <template>
     <div class="bg-form w-[100%] min-h-14 rounded-2xl flex justify-between items-center px-6" >
-        <p class="text-color-sec font-wt-logo" :class="{'line-through decoration-1':completed}">{{task.input}}</p>
+        <p class="text-color-sec font-wt-logo" :class="{'line-through decoration-1':task.isCompleted}">{{task.input}}</p>
         <div class="flex gap-2 ">
           <router-link :to="`/${task.id}`">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(56,67,73)" class="w-6 h-6" >
